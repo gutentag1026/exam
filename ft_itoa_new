@@ -1,0 +1,45 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+char *ft_itoa(int nbr)
+{
+  int len;
+  int flg;
+  char *tmp;
+  int nb;
+  len = 0;
+  flg = 0;
+  if(nbr < 0)
+  {
+    nbr *= -1;
+    len++;
+    flg = -1;
+  }
+  nb = nbr;
+  while(nbr)
+  {
+    nbr /= 10;
+    len++;
+  }
+  
+  
+  tmp = (char *)malloc(sizeof(char)*(len+1));
+  tmp[len] = '\0';
+  if(flg == -1)
+    tmp[0] = '-';
+    while (nb > 0)
+    {
+      len--;
+      tmp[len] = nb % 10 + '0';
+      nb /= 10;  
+    }
+  return(tmp);
+}
+
+int main()
+{
+  int a;
+  a = -1234;
+printf("%s\n",ft_itoa(a));
+return(0);
+}
