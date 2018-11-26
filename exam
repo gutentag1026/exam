@@ -1,0 +1,801 @@
+#include <stdio.h>
+/*Assignment name  : inter
+Expected files   : inter.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that takes two strings and displays, without doubles, the
+characters that appear in both strings, in the order they appear in the first
+one.
+
+The display will be followed by a \n.
+
+If the number of arguments is not 2, the program displays \n.
+
+Examples:
+
+$>./inter "padinton" "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
+padinto$
+$>./inter ddf6vewg64f gtwthgdwthdwfteewhrtag6h4ffdhsd | cat -e
+df6ewg4$
+$>./inter "rien" "cette phrase ne cache rien" | cat -e
+rien$
+$>./inter | cat -e
+$
+*/
+#include <unistd.h>
+
+/*
+int iter (char *s, char c, int len)
+{
+  int i;
+  
+  i = 0;
+  
+  while (s[i] && (i < len || len == -2))
+  {
+    if (s[i] == c)
+      return (1);
+    i++;
+  }
+  return (0);
+}
+
+int main(int argc, char **argv)
+{
+  
+  if (argc == 3)
+  {
+    int i;
+    
+    i = 0;
+    while(argv[1][i])
+    {
+       if (!iter(argv[1],argv[1][i],i) && iter(argv[2],argv[1][i],-2))
+          write(1,&argv[1][i],1);
+       i++;
+    }
+
+  }
+  write(1,"\n",1);
+  return 0;
+    
+}
+
+Assignment name  : print_bits
+Expected files   : print_bits.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a function that takes a byte, and prints it in binary WITHOUT A NEWLINE
+AT THE END.
+
+Your function must be declared as follows:
+
+void  print_bits(unsigned char octet);
+
+Example, if you pass 2 to print_bits, it will print "00000010"
+
+#include <unistd.h>
+void print_bits(unsigned char octet) 
+{
+  
+  int mod = 0;
+  int divide = 0;
+  int o = (int)octet;
+  char s[8];
+  int i;
+  i = 0;
+  
+  while (i < 8)
+  {
+    s[i] = '0';
+    ++i;
+  }
+  
+  i = 7;
+  while (o != 0)
+  {
+      mod = o % 2 + '0';
+
+      s[i] = mod;
+      o = o / 2;
+      --i;
+  }
+
+  write(1, &s[0], 8);
+
+}
+
+int main()
+{
+  unsigned char o = 13;
+  print_bits(o);
+  return (0);
+}
+#include <stdio.h>
+int main()
+{
+  int row[2][12];
+  int row_index = 1;
+  int n = 5, i, j;
+  
+  for (i = 0; i < 2; i++)
+  {   
+      for (j = 0; j < n+2; j++)
+          row[i][j] = 0;
+  }
+  row[0][1] = 1;
+
+  for (i = 0; i < n; i++)
+  {
+    for (j = 1; j <= i + 1; j++)
+      row[row_index][j] = row[1-row_index][j-1] + row[1-row_index][j];
+
+    for (j = 0; j < 4 - i; j++)
+      printf("_");
+    for (j = 1; j <= i + 1; j++)
+      printf("%d ", row[row_index][j]);
+    
+    printf("\n");
+    row_index = 1- row_index;
+  }
+}
+What is the difference between NULL, '\0' and 0
+
+Null Pointers
+if (!pointer)
+if (pointer == NULL)
+if (pointer == 0)
+
+Null Characters
+
+if (!*string_pointer)
+checks if the string pointer is pointing at a null character
+
+if (*string_pointer)
+checks if the string pointer is pointing at a non-null character
+
+ '\0' is (like all character literals) an integer constant == 0
+https://stackoverflow.com/questions/1296843/what-is-the-difference-between-null-0-and-0
+
+root@machine:~# cd /temp
+root@machine:/temp# ls
+a.out             file.cpp         pashRunner.sh        swift
+bootScript.sh     inputFile        portwatch.sh         swiftRunner.sh
+default.zip       isalive.js       powershellRunner.sh  tree2json.py
+dirwatch_loop.sh  javaRunner.sh    script.sh            uploads
+dirwatch.sh       kotlinRunner.sh  sql_runner_dump.sh   watches.sh
+elixirRunner.sh   nodejsRunner.js  sql_runner.sh
+erlangRunner.sh   nodejsRunner.sh  sql_setup.sh
+root@machine:/temp# gcc file.cpp
+root@machine:/temp# ./a.out
+#include <stdio.h>
+#include <unistd.h>
+/*Assignment name  : inter
+Expected files   : inter.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that takes two strings and displays, without doubles, the
+characters that appear in both strings, in the order they appear in the first
+one.
+
+The display will be followed by a \n.
+
+If the number of arguments is not 2, the program displays \n.
+
+Examples:
+
+$>./inter "padinton" "paqefwtdjetyiytjneytjoeyjnejeyj" | cat -e
+padinto$
+$>./inter ddf6vewg64f gtwthgdwthdwfteewhrtag6h4ffdhsd | cat -e
+df6ewg4$
+$>./inter "rien" "cette phrase ne cache rien" | cat -e
+rien$
+$>./inter | cat -e
+$
+*/
+
+
+/*
+int iter (char *s, char c, int len)
+{
+  int i;
+  
+  i = 0;
+  
+  while (s[i] && (i < len || len == -2))
+  {
+    if (s[i] == c)
+      return (1);
+    i++;
+  }
+  return (0);
+}
+
+int main(int argc, char **argv)
+{
+  
+  if (argc == 3)
+  {
+    int i;
+    
+    i = 0;
+    while(argv[1][i])
+    {
+       if (!iter(argv[1],argv[1][i],i) && iter(argv[2],argv[1][i],-2))
+          write(1,&argv[1][i],1);
+       i++;
+    }
+
+  }
+  write(1,"\n",1);
+  return 0;
+    
+}
+
+Assignment name  : print_bits
+Expected files   : print_bits.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a function that takes a byte, and prints it in binary WITHOUT A NEWLINE
+AT THE END.
+
+Your function must be declared as follows:
+
+void  print_bits(unsigned char octet);
+
+Example, if you pass 2 to print_bits, it will print "00000010"
+
+#include <unistd.h>
+void print_bits(unsigned char octet) 
+{
+  
+  int mod = 0;
+  int divide = 0;
+  int o = (int)octet;
+  char s[8];
+  int i;
+  i = 0;
+  
+  while (i < 8)
+  {
+    s[i] = '0';
+    ++i;
+  }
+  
+  i = 7;
+  while (o != 0)
+  {
+      mod = o % 2 + '0';
+
+      s[i] = mod;
+      o = o / 2;
+      --i;
+  }
+
+  write(1, &s[0], 8);
+
+}
+
+int main()
+{
+  unsigned char o = 13;
+  print_bits(o);
+  return (0);
+}
+Assignment name  : do_op
+Expected files   : *.c, *.h
+Allowed functions: atoi, printf, write
+--------------------------------------------------------------------------------
+
+Write a program that takes three strings:
+- The first and the third one are representations of base-10 signed integers
+  that fit in an int.
+- The second one is an arithmetic operator chosen from: + - * / %
+
+The program must display the result of the requested arithmetic operation,
+followed by a newline. If the number of parameters is not 3, the program
+just displays a newline.
+
+You can assume the string have no mistakes or extraneous characters. Negative
+numbers, in input or output, will have one and only one leading '-'. The
+result of the operation fits in an int.
+
+Examples:
+
+$> ./do_op "123" "*" 456 | cat -e
+56088$
+$> ./do_op "9828" "/" 234 | cat -e
+42$
+$> ./do_op "1" "+" "-43" | cat -e
+-42$
+$> ./do_op | cat -e
+$
+
+Assignment name  : expand_str
+Expected files   : expand_str.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that takes a string and displays it with exactly three spaces
+between each word, with no spaces or tabs either at the beginning or the end,
+followed by a newline.
+
+A word is a section of string delimited either by spaces/tabs, or by the
+start/end of the string.
+
+If the number of parameters is not 1, or if there are no words, simply display
+a newline.
+
+Examples:
+
+$> ./expand_str "vous   voyez   c'est   facile   d'afficher   la   meme   chose" | cat -e
+vous   voyez   c'est   facile   d'afficher   la   meme   chose$
+$> ./expand_str " seulement          la c'est      plus dur " | cat -e
+seulement   la   c'est   plus   dur$
+$> ./expand_str "comme c'est cocasse" "vous avez entendu, Mathilde ?" | cat -e
+$
+$> ./expand_str "" | cat -e
+$
+$>
+*/
+/*
+int  is_space(char c)auto
+{
+    if (c == ' ' || c == '\t') 
+      return (1);
+    else 
+      return (0);
+}
+
+int  main(int argc, char **argv)
+{
+  
+  int flg;
+  flg = 0;
+ 
+  if (argc == 2)
+  {
+    int i;
+    
+    i = 0;
+    while (is_space(argv[1][i]))
+      i++;
+    while (argv[1][i])
+    {
+        if (is_space(argv[1][i]))
+        {
+          flg = 1;
+        }
+        else
+        {
+          if (flg)
+            write(1,"___",3);
+          write(1,&argv[1][i],1);
+          flg = 0;
+        }
+      i++;
+    }
+  }
+  write(1,"\ndone\n",6);
+  return (0);
+}
+Assignment name  : epur_str
+Expected files   : epur_str.c
+Allowed functions: write
+--------------------------------------------------------------------------------
+
+Write a program that takes a string, and displays this string with exactly one
+space between words, with no spaces or tabs either at the beginning or the end,
+followed by a \n.
+
+A "word" is defined as a part of a string delimited either by spaces/tabs, or
+by the start/end of the string.
+
+If the number of arguments is not 1, or if there are no words to display, the
+program displays \n.
+
+Example:
+
+$> ./epur_str "vous voyez c'est facile d'afficher la meme chose" | cat -e
+vous voyez c'est facile d'afficher la meme chose$
+$> ./epur_str " seulement          la c'est      plus dur " | cat -e
+seulement la c'est plus dur$
+$> ./epur_str "comme c'est cocasse" "vous avez entendu, Mathilde ?" | cat -e
+$
+$> ./epur_str "" | cat -e
+$
+$>
+int  is_space(char c)
+{
+    if (c == ' ' || c == '\t') 
+      return (1);
+    else 
+      return (0);
+}
+
+int  main(int argc, char **argv)
+{
+  
+  int flg;
+  flg = 0;
+ 
+  if (argc == 2)
+  {
+    int i;
+    
+    i = 0;
+    while (is_space(argv[1][i]))
+      i++;
+    while (argv[1][i])
+    {
+        if (is_space(argv[1][i]))
+        {
+          flg = 1;
+        }
+        else
+        {
+          if (flg)
+            write(1,"_",1);
+          write(1,&argv[1][i],1);
+          flg = 0;
+        }
+      i++;
+    }
+  }
+  write(1,"\n",1);
+  return (0);
+}
+
+Assignment name  : ft_atoi_base
+Expected files   : ft_atoi_base.c
+Allowed functions: None
+--------------------------------------------------------------------------------
+
+Write a function that converts the string argument str (base N <= 16)
+to an integer (base 10) and returns it.
+
+The characters recognized in the input are: 0123456789abcdef
+Those are, of course, to be trimmed according to the requested base. For
+example, base 4 recognizes "0123" and base 16 recognizes "0123456789abcdef".
+
+Uppercase letters must also be recognized: "12fdb3" is the same as "12FDB3".
+
+Minus signs ('-') are interpreted only if they are the first character of the
+string.
+
+Your function must be declared as follows:
+
+int  ft_atoi_base(const char *str, int str_base);
+
+十进制 123 = 3 * 10^0 + 2* 10^1 + 1 * 10^2;
+十六进制 1abf = f * 16^0 + b * 16^1 + a * 16^2 + 1 * 16^3
+15 * 16^0 + 11* 16^1 + 10* 16^2+ 1 *16^3;
+二进制 1101 1 * 2^0 + 0 * 2^1 + 1 * 2^2 + 1 * 2^3
+
+
+int  is_space(char c)
+{
+  return ( c == '\t'|| c == '\v'|| c == '\f' || c == '\n' || c == '\r' || c == ' ');
+}   
+      
+int  ft_atoi_base(const char *str, int str_base)
+{
+  int i;
+  i = 0;
+  int sign;
+  sign = 1;
+  int nbr;
+  nbr = 0;
+  
+  if (str_base < 2 || str_base > 16)
+    return (0);
+  else
+  {
+    while (is_space(str[i]))
+      i++;
+    if (str[i] == '-')
+      sign = -1;
+    if (str[i] == '-' || str[i] == '+')
+      i++;
+    while (str[i])
+    {
+      if (str[i] >= 'A' && str[i] <= 'F')
+          nbr = nbr * str_base + (str[i] - 'A' + 10);
+      else if (str[i] >= 'a' && str[i] <= 'f')
+          nbr = nbr * str_base + (str[i] - 'a' + 10);
+      else
+          nbr = nbr * str_base + (str[i] - '0');
+      i++;
+    }
+  }
+  return (nbr * sign);
+}
+
+int main()
+{
+  const char s[] = "1abf";
+  printf("%d\n", ft_atoi_base(s,16));
+
+  return (0);
+}
+
+Assignment name  : ft_list_size
+Expected files   : ft_list_size.c, ft_list.h
+Allowed functions:
+--------------------------------------------------------------------------------
+
+Write a function that returns the number of elements in the linked list that's
+passed to it.
+
+It must be declared as follows:
+
+int  ft_list_size(t_list *begin_list);
+
+You must use the following structure, and turn it in as a file called
+ft_list.h:
+
+
+#include <stdlib.h>
+
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *content;
+    int            size;
+}                 t_list;
+
+int  ft_list_size(t_list *begin_list)
+{
+  int i;
+  
+  i = 0;
+  while (begin_list != NULL)
+  {
+    i++;
+    begin_list = begin_list->next;
+  }
+  return (i);
+}
+
+      
+int main()
+{
+  t_list * h1, * h2, * h3, * head;
+
+  if (!(h1 = (t_list*)malloc(sizeof(t_list))))
+    return (0);
+  if (!(h2 = (t_list*)malloc(sizeof(t_list))))
+    return (0);
+  if (!(h3 = (t_list*)malloc(sizeof(t_list))))
+    return (0);
+  head = NULL;
+  printf("length 0: %d\n", ft_list_size(head));
+  head = h1;
+  h1->next = NULL;
+  printf("length 1: %d\n", ft_list_size(head));
+  h1->next = h2;
+  h2->next = NULL;
+  printf("length 2: %d\n", ft_list_size(head));
+  h2->next = h3;
+  h3->next = NULL;
+  printf("length 3: %d\n", ft_list_size(head));
+
+  free(h1);
+  free(h2);
+  free(h3);
+}  
+*/
+#include <stdlib.h>
+
+typedef struct    s_list
+{
+    struct s_list *next;
+    void          *content;
+    int            size;
+}                 t_list;
+  
+int  ft_list_size(t_list *begin_list)
+{
+  int i;
+  
+  i = 0;
+  while (begin_list != NULL)
+  {
+    i++;
+    begin_list = begin_list->next;
+  }
+  return (i);
+}
+
+t_list *create_list (int n)
+{
+  
+  t_list *head = NULL, *temp = NULL;
+
+  while (n--)
+  {  
+    temp = (t_list *)malloc(sizeof(t_list));
+    temp->next = NULL;
+    if (head != NULL)
+    {
+      temp->next = head;
+      head = temp;
+    }
+    else
+    {
+      head = temp;
+    }
+  }
+  return head;
+}
+
+void delete_list (t_list *head)
+{
+  t_list * tmp;
+  while (head != NULL)
+  {
+    tmp = head;
+    head = tmp->next;
+    free (tmp);
+  }
+}
+    
+
+int main()
+{
+  t_list * h1, * h2, * h3, * h0;
+
+  h0 = create_list(0);
+  if (!(h1 = create_list(1)))
+    return 0;
+  if (!(h2 = create_list(2)))
+    return 0;
+  if (!(h3 = create_list(3)))
+    return 0;
+  printf("length 0: %d\n", ft_list_size(h0));
+  printf("length 1: %d\n", ft_list_size(h1));
+  printf("length 2: %d\n", ft_list_size(h2));
+  printf("length 3: %d\n", ft_list_size(h3));
+
+  delete_list(h0);
+  delete_list(h1);
+  delete_list(h2);
+  delete_list(h3);
+
+}  
+  
+
+
+  
+  #include <stdio.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
+
+int BUFF_SIZE = 16;
+int MAX_EXT_BUFF_SIZE = 512*1024;
+
+
+char * new_buf(char * old_buf, int old_n, int * new_n)
+{
+  char * new_b = NULL;
+  *new_n = old_n > MAX_EXT_BUFF_SIZE ? old_n + MAX_EXT_BUFF_SIZE : old_n * 2;
+  *new_n = *new_n == 0 ? BUFF_SIZE : *new_n;
+  if (new_b = (char *)malloc(sizeof(char) * *new_n)) {
+    int i;
+    for (i = 0; i < old_n; ++i) {
+      new_b[i] = old_buf[i];
+    }
+    free(old_buf);
+    return new_b;
+  }
+  return NULL;
+}
+
+int get_next_line(int fd, char ** result)
+{
+  char * buf;
+  static char * read_buf = NULL;
+  static int read_cnt;
+  static int read_ptr;
+
+  int buf_sz;
+  int buf_ptr = 0;
+  
+  if (read_buf == NULL) {
+    read_buf = new_buf(NULL, 0, &buf_sz);
+    if (!read_buf || buf_sz != BUFF_SIZE) {
+      return -1;
+    }
+    read_ptr = 0;
+    read_cnt = 0;
+  }
+  
+  buf = new_buf(NULL, 0, &buf_sz);
+  if (!buf) {
+    return -1;
+  }
+
+  while (true) 
+  {
+    if (read_cnt == 0) 
+    {
+      read_cnt = read(fd, read_buf, BUFF_SIZE);
+      read_ptr = 0;
+    }
+    if (read_cnt == -1)
+    {
+      return -1;
+    }
+    if (read_cnt == 0) 
+    {
+      if (buf_ptr == 0) 
+      {
+        free(buf);
+        free(read_buf);
+        return 0;
+      }
+      buf[buf_ptr] = '\0';
+      *result = buf;
+      read_cnt = 0;
+      return 1;
+    }
+    while (read_ptr < read_cnt)
+    {
+      if (read_buf[read_ptr] == '\n') 
+      {
+        buf[buf_ptr] = '\0';
+        *result = buf;
+        read_ptr++;
+        if (read_ptr >= read_cnt) 
+        {
+          free(read_buf);
+          read_buf = NULL;
+          read_cnt = 0;
+          read_ptr = 0;
+        }
+        return 1;
+      }
+      buf[buf_ptr++] = read_buf[read_ptr++];
+      if (buf_ptr == buf_sz) 
+      {
+          buf = new_buf(buf, buf_sz, &buf_sz);
+          if (!buf) 
+          {
+            return -1;
+          }
+      }
+    }
+    read_cnt = 0;
+  }    
+}
+   
+  
+int main()
+{
+  int input_fd;
+  char * new_line = NULL;
+  int code;
+  input_fd = open("/temp/input", O_RDONLY);
+  if (input_fd != -1) {
+    do {
+      code = get_next_line(input_fd, &new_line);
+      if (code == 1)
+        printf("%s\n", new_line);
+
+    } while (code == 1);
+    
+  }
+}
+  
+  
+  
+  
+  
+  
+
+
